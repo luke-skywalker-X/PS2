@@ -70,4 +70,44 @@ for a in range(5):
     MUSUH = Enemy(GAMBAR_MUSUH1, randint(50, LEBAR_SCENE-50), -100, 50, 50, randint(1, 3))
     GRUP_MUSUH.add(MUSUH)
 
+""" game loop """
+while GAME_ON:
+    """ event handling untuk QUIT """
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            GAME_ON = False ## matikan game
+
+    """ tampilan game """
+    SCENE.blit(BACKGROUND, (0, 0))
+    PLAYER1.tampil()
+    PLAYER1.gerak()
+
+    """ tulisan score dan terlewat """
+    TEKS_SCORE = FONT1.render("SCORE: " + str(TERLEWAT), 1, WARNA_HITAM)
+    TEKS_TERLEWAT = FONT1.render("MISSED: " + str(TERLEWAT), 1, WARNA_HITAM)
+    SCENE.blit(TEKS_SCORE, (50, 0))
+    SCENE.blit(TEKS_TERLEWAT, (50, 50))
+
+    """ grup musuh tampil dan gerakkan """
+    for musuh in GRUP_MUSUH:
+        SCENE.blit(musuh.gambar, musuh.rect)
+        musuh.gerak()
+
+    """ penting """
+    FPS.tick(60)
+    pygame.display.update()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
